@@ -16,9 +16,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RestWithASPNET.Business.Implementations;
-using RestWithASPNET.Repository.Implementations;
 using RestWithASPNET.Repository;
 using Serilog;
+using RestWithASPNET.Repository.Generic;
 
 namespace RestWithASPNET
 {
@@ -59,9 +59,8 @@ namespace RestWithASPNET
 
             //Dependency Injection
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
-            services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
             services.AddScoped<IBookBusiness, BookBusinessImplementation>();
-            services.AddScoped<IBookRepository, BookRepositoryImplementation>();
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
 
             services.AddSwaggerGen(c =>
@@ -114,7 +113,7 @@ namespace RestWithASPNET
             });
         }
 
-        private void MigrateDatabase(string connection)
+        private static void MigrateDatabase(string connection)
         {
             try
             {
