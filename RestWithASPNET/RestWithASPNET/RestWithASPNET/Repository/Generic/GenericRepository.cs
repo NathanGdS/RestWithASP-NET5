@@ -12,7 +12,7 @@ namespace RestWithASPNET.Repository.Generic
     {
         private readonly MySQLContext _context;
 
-        private DbSet<T> dataSet;
+        private readonly DbSet<T> dataSet;
 
         public GenericRepository(MySQLContext context)
         {

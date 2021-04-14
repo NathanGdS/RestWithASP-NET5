@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RestWithASPNET.Data.VO;
 
 namespace RestWithASPNET.Controllers
 {
@@ -16,7 +17,7 @@ namespace RestWithASPNET.Controllers
     {
 
         private readonly ILogger<PersonController> _logger;
-        private IPersonBusiness _personBusiness;
+        private readonly IPersonBusiness _personBusiness;
 
 
         public PersonController(ILogger<PersonController> logger, IPersonBusiness personService)
@@ -45,7 +46,7 @@ namespace RestWithASPNET.Controllers
 
         [HttpPost]
         //[FromBody] pega o json que esta no body da requisicao e o converte para um Person
-        public IActionResult Create([FromBody] Person person)
+        public IActionResult Create([FromBody] PersonVO person)
         {
            
             if (person == null)
@@ -56,7 +57,7 @@ namespace RestWithASPNET.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update([FromBody] Person person)
+        public IActionResult Update([FromBody] PersonVO person)
         {
 
             if (person == null)
